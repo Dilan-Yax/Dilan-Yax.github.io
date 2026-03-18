@@ -3,154 +3,283 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dilan Yax | Systems Engineer Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <title>Dilan Yax | Systems Engineer & Software Architecture</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
     <style>
         :root {
-            --bg: #030712;
-            --card-bg: #111827;
-            --card-border: #1f2937;
-            --accent: #3b82f6; /* Azul Engineering */
-            --accent-glow: rgba(59, 130, 246, 0.3);
-            --text-primary: #f9fafb;
-            --text-secondary: #9ca3af;
-            --font-main: 'Inter', sans-serif;
-            --font-mono: 'Fira Code', monospace;
+            --background: #050505;
+            --surface: #0f0f0f;
+            --surface-accent: #1a1a1a;
+            --primary: #3b82f6; /* Azul de ingeniería moderna */
+            --primary-muted: rgba(59, 130, 246, 0.1);
+            --border: #262626;
+            --text-main: #f5f5f5;
+            --text-secondary: #a3a3a3;
+            --font-ui: 'Inter', sans-serif;
+            --font-code: 'JetBrains Mono', monospace;
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
+        html { scroll-behavior: smooth; }
+
         body {
-            background-color: var(--bg);
-            color: var(--text-primary);
-            font-family: var(--font-main);
+            background-color: var(--background);
+            color: var(--text-main);
+            font-family: var(--font-ui);
             line-height: 1.6;
-            padding: 40px 20px;
+            padding-bottom: 100px;
         }
 
-        .container { max-width: 1000px; margin: 0 auto; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 24px; }
 
-        /* HEADER PROFESIONAL */
-        header { margin-bottom: 60px; text-align: left; }
-        h1 { font-size: 3rem; font-weight: 700; letter-spacing: -2px; margin-bottom: 8px; }
-        .tagline { font-family: var(--font-mono); color: var(--accent); font-size: 1.1rem; }
+        /* NAVEGACIÓN PROFESIONAL */
+        nav {
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            background: rgba(10, 10, 10, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            padding: 12px 24px;
+            margin: 20px auto;
+            max-width: fit-content;
+            display: flex;
+            gap: 24px;
+        }
+
+        nav a {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-family: var(--font-code);
+            transition: var(--transition);
+        }
+
+        nav a:hover { color: var(--primary); }
+
+        /* SECCIÓN HERO (Presentación Impactante) */
+        .hero {
+            padding: 120px 0 80px 0;
+            text-align: left;
+        }
+
+        .hero span {
+            font-family: var(--font-code);
+            color: var(--primary);
+            font-size: 0.9rem;
+            display: block;
+            margin-bottom: 12px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            font-weight: 700;
+            letter-spacing: -2px;
+            line-height: 1.1;
+        }
 
         /* BENTO GRID SYSTEM */
         .bento-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            grid-gap: 20px;
+            grid-template-columns: repeat(4, 1fr);
+            grid-auto-rows: minmax(160px, auto);
+            gap: 16px;
+            margin-top: 40px;
         }
 
         .card {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 16px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
             padding: 24px;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         .card:hover {
-            border-color: var(--accent);
-            box-shadow: 0 0 25px var(--accent-glow);
-            transform: translateY(-5px);
+            border-color: var(--primary);
+            background: var(--surface-accent);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
         }
 
-        /* SOBRE MÍ (Ocupa 2 columnas) */
-        .about-card { grid-column: span 2; }
-        .about-card h2 { font-size: 1.5rem; margin-bottom: 12px; }
-        .about-card p { color: var(--text-secondary); font-size: 1rem; }
+        /* CONFIGURACIÓN DE CELDAS BENTO */
+        .span-3 { grid-column: span 3; }
+        .span-2 { grid-column: span 2; }
+        .span-1 { grid-column: span 1; }
 
-        /* TECH STACK (Columna lateral) */
-        .tech-card { grid-column: span 1; }
-        .tech-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px; }
-        .tech-tag {
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            background: #1f2937;
-            color: var(--text-primary);
-            padding: 4px 10px;
+        .card h2 { font-size: 1.25rem; margin-bottom: 12px; font-weight: 600; }
+        .card p { color: var(--text-secondary); font-size: 0.95rem; }
+
+        /* ESTILO TÉCNICO DE PROYECTO */
+        .project-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-top: 20px;
+        }
+
+        .tech-pill {
+            font-family: var(--font-code);
+            font-size: 0.7rem;
+            color: var(--primary);
+            background: var(--primary-muted);
+            padding: 4px 12px;
             border-radius: 6px;
-            border: 1px solid var(--card-border);
         }
 
-        /* PROYECTOS (Grid inferior) */
-        .project-card { grid-column: span 3; display: flex; flex-direction: column; gap: 10px; }
-        .project-header { display: flex; justify-content: space-between; align-items: center; }
-        .project-title { font-weight: 600; font-size: 1.3rem; color: var(--accent); }
-        .status { font-family: var(--font-mono); font-size: 0.7rem; color: #10b981; text-transform: uppercase; }
+        /* SECCIÓN DE HABILIDADES (BADGES) */
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
 
-        /* ESTADÍSTICAS SUTILES */
-        .stats-grid { grid-column: span 3; display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
-        .stat-item { text-align: center; border: 1px dashed var(--card-border); border-radius: 12px; padding: 15px; }
-        .stat-value { font-family: var(--font-mono); font-size: 1.2rem; font-weight: 700; display: block; }
-        .stat-label { font-size: 0.8rem; color: var(--text-secondary); }
+        .skill-item {
+            font-family: var(--font-code);
+            font-size: 0.8rem;
+            border: 1px solid var(--border);
+            padding: 6px 14px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            transition: var(--transition);
+        }
 
-        /* FOOTER */
-        footer { margin-top: 80px; text-align: center; border-top: 1px solid var(--card-border); padding-top: 30px; }
-        .footer-text { font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-secondary); }
+        .skill-item:hover {
+            border-color: var(--primary);
+            background: var(--primary-muted);
+            color: var(--primary);
+        }
 
-        /* RESPONSIVE */
-        @media (max-width: 768px) {
-            .bento-grid { grid-template-columns: 1fr; }
-            .about-card, .tech-card, .project-card, .stats-grid { grid-column: span 1; }
-            h1 { font-size: 2.2rem; }
+        /* ANIMACIÓN DE FADE-IN AL CARGAR */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s var(--ease) forwards;
+        }
+
+        /* FOOTER PROFESIONAL */
+        footer {
+            margin-top: 120px;
+            padding: 40px 0;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        footer p {
+            font-family: var(--font-code);
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        /* RESPONSIVE DESIGN (Celulares) */
+        @media (max-width: 900px) {
+            .bento-grid { grid-template-columns: 1fr; grid-auto-rows: auto; }
+            .span-3, .span-2, .span-1 { grid-column: span 1; }
+            .hero h1 { font-size: 3rem; }
+            nav { gap: 12px; font-size: 0.75rem; }
         }
     </style>
 </head>
-<body>
+<body class="fade-in">
 
-<div class="container">
-    <header>
-        <h1>Dilan Yax</h1>
-        <div class="tagline">_INGENIERIA_EN_SISTEMAS // SOFTWARE_DEVELOPER</div>
-    </header>
+    <div class="container">
+        
+        <nav>
+            <a href="#hero">// INICIO</a>
+            <a href="#sobre-mi">// SOBRE MI</a>
+            <a href="#proyectos">// PROYECTOS</a>
+            <a href="#tecnologias">// STACK</a>
+        </nav>
 
-    <main class="bento-grid">
-        <div class="card about-card">
-            <h2>Perfil Profesional</h2>
-            <p>Especializado en la arquitectura de soluciones técnicas y lógica de sistemas. Enfocado en la optimización de procesos mediante código limpio y eficiente. Estudiante de alto rendimiento en Ingeniería en Sistemas con pasión por la infraestructura de software.</p>
-        </div>
+        <header id="hero" class="hero">
+            <span>DILAN_YAX / PORTFOLIO_V4.0</span>
+            <h1>Construyendo sistemas <span>eficientes.</span></h1>
+            <p style="margin-top: 24px; color: var(--text-secondary); max-width: 600px; font-size: 1.15rem;">
+                Ingeniería en Sistemas enfocada en la arquitectura de software y optimización de infraestructura técnica. Especializado en el desarrollo de soluciones escalables con lógica de alto nivel.
+            </p>
+        </header>
 
-        <div class="card tech-card">
-            <h2>Stack</h2>
-            <div class="tech-list">
-                <span class="tech-tag">C#</span>
-                <span class="tech-tag">C++</span>
-                <span class="tech-tag">Python</span>
-                <span class="tech-tag">SQL Server</span>
-                <span class="tech-tag">.NET WPF</span>
-                <span class="tech-tag">Git</span>
+        <main class="bento-grid">
+            
+            <div id="sobre-mi" class="card span-3">
+                <div>
+                    <h2>Arquitectura y Visión</h2>
+                    <p>Como futuro Ingeniero en Sistemas, mi enfoque trasciende la escritura de código. Me especializo en la lógica detrás de los sistemas complejos, diseñando estructuras eficientes que resuelven problemas reales mediante algoritmos optimizados y gestión de recursos crítica.</p>
+                </div>
             </div>
-        </div>
 
-        <div class="card project-card">
-            <div class="project-header">
-                <div class="project-title">Simulador de Sistemas Operativos</div>
-                <div class="status">PROYECTO_ACTIVO</div>
+            <div id="tecnologias" class="card span-1">
+                <div>
+                    <h2>Especialidad</h2>
+                    <div class="skills-grid">
+                        <span class="skill-item">C#</span>
+                        <span class="skill-item">C++</span>
+                        <span class="skill-item">Python</span>
+                        <span class="skill-item">SQL Server</span>
+                        <span class="skill-item">.NET WPF</span>
+                    </div>
+                </div>
             </div>
-            <p>Implementación de algoritmos de planificación de CPU y gestión de memoria dinámica en entorno C#. Resolución de problemas de concurrencia y gestión de recursos del sistema.</p>
-        </div>
 
-        <div class="stats-grid">
-            <div class="card stat-item">
-                <span class="stat-value">2026</span>
-                <span class="stat-label">Fullstack Path</span>
+            <div id="proyectos" class="card span-2">
+                <div>
+                    <h2>Simulador de Sistemas Operativos</h2>
+                    <p>Diseño e implementación de un entorno técnico para la gestión de procesos, planificación de CPU y segmentación de memoria dinámica.</p>
+                    <div class="project-meta">
+                        <span class="tech-pill">SYSTEM_CORE</span>
+                        <span class="tech-pill">C#</span>
+                    </div>
+                </div>
             </div>
-            <div class="card stat-item">
-                <span class="stat-value">C# / WPF</span>
-                <span class="stat-label">Core Specialization</span>
-            </div>
-        </div>
-    </main>
 
-    <footer>
-        <div class="footer-text">
-            SYSTEMS_ENGINEER_PORTFOLIO_V3.0 // BUILD_ON_GITHUB_PAGES
-        </div>
-    </footer>
-</div>
+            <div class="card span-2">
+                <div>
+                    <h2>Fullstack Roadmap</h2>
+                    <p>Profundizando en arquitecturas distribuidas, APIs robustas y el ciclo completo de vida del desarrollo de software moderno.</p>
+                    <div class="project-meta">
+                        <span class="tech-pill">LEARNING</span>
+                        <span class="tech-pill">REST_API</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card span-1">
+                <h2>Lógica</h2>
+                <p>Análisis algorítmico y resolución de problemas complejos.</p>
+            </div>
+
+            <div class="card span-1">
+                <h2>Entorno</h2>
+                <p>Desarrollo local, Git, y gestión de infraestructura.</p>
+            </div>
+
+            <div class="card span-2">
+                <h2>Filosofía</h2>
+                <p>"La eficiencia no es un accidente, es el resultado de un diseño inteligente." Mi compromiso es la calidad técnica en cada despliegue.</p>
+            </div>
+
+        </main>
+
+        <footer>
+            <p> 2026 Dilan Yax</p>
+            <p style="font-family: var(--font-code); color: var(--primary);">BUILD_SYSTEMS_NOT_JUST_APPS</p>
+        </footer>
+
+    </div>
 
 </body>
 </html>
