@@ -3,152 +3,275 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dilan Yax | Portafolio</title>
+    <title>Dilan Yax | Ingeniería en Sistemas</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --bg: #0d1117;
-            --card-bg: #161b22;
-            --border: #30363d;
-            --accent: #58a6ff;
-            --text-main: #c9d1d9;
-            --text-bold: #f0f6fc;
-            --font-main: 'Inter', sans-serif;
+            --bg: #050505;
+            --surface: #0f0f0f;
+            --border: #222222;
+            --accent: #3b82f6;
+            --text-main: #f5f5f5;
+            --text-muted: #888888;
+            --font-ui: 'Inter', sans-serif;
             --font-code: 'JetBrains Mono', monospace;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        
+        html { scroll-behavior: smooth; }
+
         body {
             background-color: var(--bg);
             color: var(--text-main);
-            font-family: var(--font-main);
-            padding: 40px 20px;
+            font-family: var(--font-ui);
             line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
         }
 
-        .container { max-width: 850px; margin: 0 auto; }
+        .container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
 
-        header { margin-bottom: 50px; }
-        h1 { font-size: 2.5rem; font-weight: 800; color: var(--text-bold); letter-spacing: -1px; }
-        .subtitle { font-family: var(--font-code); color: var(--accent); font-size: 0.9rem; margin-top: 5px; }
+        /* NAVEGACIÓN FLOTANTE (ESTILO GLASSMORPHISM) */
+        nav {
+            position: fixed;
+            top: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            background: rgba(15, 15, 15, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            padding: 8px 24px;
+            display: flex;
+            gap: 20px;
+        }
 
-        /* ESTRUCTURA BENTO GRID */
-        .bento-grid {
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 600;
+            font-family: var(--font-code);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+        }
+
+        nav a:hover { color: var(--text-main); }
+
+        /* HERO SECTION */
+        header {
+            padding: 180px 0 100px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        header h1 {
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            font-weight: 800;
+            letter-spacing: -3px;
+            line-height: 0.9;
+            margin-bottom: 20px;
+        }
+
+        header h1 span { color: var(--accent); }
+
+        header p {
+            font-family: var(--font-code);
+            color: var(--text-muted);
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
+
+        /* SECCIONES */
+        section { padding: 80px 0; border-bottom: 1px solid var(--border); }
+        
+        h2 {
+            font-family: var(--font-code);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent);
+            margin-bottom: 30px;
+        }
+
+        /* GRID DE PROYECTOS (BENTO STYLE) */
+        .grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             gap: 16px;
         }
 
         .card {
-            background: var(--card-bg);
+            background: var(--surface);
             border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 24px;
-            transition: all 0.3s ease;
+            border-radius: 16px;
+            padding: 30px;
             text-decoration: none;
             color: inherit;
-        }
-
-        /* EFECTO DE ENLACE EN PROYECTOS */
-        .project-link:hover {
-            border-color: var(--accent);
-            transform: translateY(-3px);
-            background: #1c2128;
-        }
-
-        .span-2 { grid-column: span 2; }
-        .span-3 { grid-column: span 3; }
-
-        h2, h3 { color: var(--text-bold); margin-bottom: 10px; font-size: 1.2rem; }
-        p { font-size: 0.95rem; color: #8b949e; }
-
-        /* SECCIÓN DE TECNOLOGÍAS */
-        .tech-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px; }
-        .tech-badge {
-            font-family: var(--font-code);
-            font-size: 0.75rem;
-            background: #21262d;
-            padding: 4px 10px;
-            border-radius: 6px;
-            border: 1px solid var(--border);
-        }
-
-        /* ESTADÍSTICAS */
-        .stats-container {
-            grid-column: span 3;
+            transition: var(--transition);
             display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 10px;
+            flex-direction: column;
+            justify-content: space-between;
         }
-        .stats-container img { max-width: 100%; border-radius: 8px; }
+
+        .card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .card h3 { font-size: 1.25rem; margin-bottom: 10px; color: #fff; }
+        .card p { font-size: 14px; color: var(--text-muted); }
+
+        .card-footer {
+            margin-top: 20px;
+            font-family: var(--font-code);
+            font-size: 11px;
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        /* SKILLS */
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skill-tag {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-family: var(--font-code);
+            font-size: 12px;
+            color: var(--text-main);
+            transition: var(--transition);
+        }
+
+        .skill-tag:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* CONTACTO */
+        .contact-box {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+        }
+
+        .contact-btn {
+            display: inline-block;
+            margin-top: 20px;
+            background: var(--accent);
+            color: white;
+            padding: 12px 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 14px;
+            transition: var(--transition);
+        }
+
+        .contact-btn:hover {
+            filter: brightness(1.2);
+            transform: scale(1.05);
+        }
 
         footer {
-            margin-top: 60px;
+            padding: 60px 0;
             text-align: center;
             font-family: var(--font-code);
-            font-size: 0.8rem;
-            color: #484f58;
+            font-size: 11px;
+            color: var(--text-muted);
         }
 
+        /* RESPONSIVO */
         @media (max-width: 768px) {
-            .bento-grid { grid-template-columns: 1fr; }
-            .span-2, .span-3 { grid-column: span 1; }
+            header { padding-top: 140px; }
+            .grid { grid-template-columns: 1fr; }
+            nav { width: 90%; justify-content: space-around; padding: 10px; }
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <header>
-        <h1>Dilan Yax</h1>
-        <div class="subtitle">INGENIERIA_EN_SISTEMAS // DEV</div>
-    </header>
+    <nav>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Stack</a>
+        <a href="#contact">Contact</a>
+    </nav>
 
-    <main class="bento-grid">
-        <div class="card span-2">
+    <div class="container">
+        
+        <header id="hero">
+            <h1>Dilan <span>Yax</span></h1>
+            <p>// INGENIERIA EN SISTEMAS & SOFTWARE ARCHITECTURE</p>
+        </header>
+
+        <section id="about">
             <h2>Sobre mi</h2>
-            <p>Estudiante de Ingenieria en Sistemas enfocado en el desarrollo de software. Me apasiona resolver problemas logicos y construir herramientas eficientes.</p>
-        </div>
+            <p style="font-size: 1.1rem; color: var(--text-muted); max-width: 700px;">
+                Estudiante enfocado en el desarrollo de software y la optimización de sistemas. Mi enfoque se centra en resolver problemas lógicos complejos mediante la creación de herramientas eficientes y arquitectura de código limpia.
+            </p>
+        </section>
 
-        <div class="card span-1">
-            <h2>Intereses</h2>
-            <p style="font-size: 0.85rem;">Arquitectura de software, SQL Server y algoritmos.</p>
-        </div>
+        <section id="projects">
+            <h2>Proyectos seleccionados</h2>
+            <div class="grid">
+                
+                <a href="https://github.com/Dilan-Yax" class="card">
+                    <div>
+                        <h3>Simulador de Sistemas Operativos</h3>
+                        <p>Gestión avanzada de procesos, planificación de CPU y segmentación de memoria dinámica implementado en C#.</p>
+                    </div>
+                    <div class="card-footer">VIEW_REPOSITORY -></div>
+                </a>
 
-        <a href="https://github.com/Dilan-Yax/NOMBRE_DE_TU_REPOSITORIO" class="card span-3 project-link">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-                <h3>Proyecto destacado: Simulador de Sistemas Operativos</h3>
-                <span style="font-family: var(--font-code); color: var(--accent); font-size: 0.7rem;">VER_REPOSITORIO -></span>
+                <a href="https://github.com/Dilan-Yax" class="card">
+                    <div>
+                        <h3>Data Architecture SQL</h3>
+                        <p>Diseño y optimización de bases de datos relacionales orientadas a entornos de alta disponibilidad.</p>
+                    </div>
+                    <div class="card-footer">VIEW_REPOSITORY -></div>
+                </a>
+
             </div>
-            <p>Desarrollo especializado en C# y WPF enfocado en la gestion de procesos y memoria.</p>
-        </a>
+        </section>
 
-        <div class="card span-3">
-            <h2>Tecnologias y Herramientas</h2>
-            <div class="tech-list">
-                <span class="tech-badge">C#</span>
-                <span class="tech-badge">C++</span>
-                <span class="tech-badge">Python</span>
-                <span class="tech-badge">SQL Server</span>
-                <span class="tech-badge">HTML5</span>
-                <span class="tech-badge">.NET WPF</span>
+        <section id="skills">
+            <h2>Habilidades tecnicas</h2>
+            <div class="skills-container">
+                <div class="skill-tag">C# / .NET</div>
+                <div class="skill-tag">C++</div>
+                <div class="skill-tag">Python</div>
+                <div class="skill-tag">SQL Server</div>
+                <div class="skill-tag">WPF Architecture</div>
+                <div class="skill-tag">Git / GitHub</div>
             </div>
-        </div>
+        </section>
 
-        <div class="stats-container">
-            <img src="https://github-readme-stats.vercel.app/api?username=Dilan-Yax&show_icons=true&theme=tokyonight&hide_border=true" alt="Stats">
-        </div>
+        <section id="contact">
+            <div class="contact-box">
+                <h2>¿Iniciamos una colaboracion?</h2>
+                <p style="color: var(--text-muted);">Disponible para proyectos de arquitectura y desarrollo de software.</p>
+                <a href="mailto:castrococheluisdavid@gmail.com" class="contact-btn">ENVIAR CORREO</a>
+            </div>
+        </section>
 
-    </main>
+        <footer>
+            <p>DILAN_YAX // SYSTEMS_ENGINEER_V5.0 // 2026</p>
+        </footer>
 
-    <footer>
-        DILAN_YAX // 2026 // GITHUB_PAGES_PORTFOLIO
-    </footer>
-</div>
+    </div>
 
 </body>
 </html>
