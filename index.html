@@ -3,242 +3,154 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dilan Yax | Ingeniería en Sistemas & Desarrollo de Software</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
-    
+    <title>Dilan Yax | Systems Engineer Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     <style>
-        /* DEFINICIÓN DE VARIABLES PROFESIONALES */
         :root {
-            --bg-body: #0d1117; /* Gris casi negro de GitHub */
-            --bg-cards: #161b22; /* Fondo de tarjetas de GitHub */
-            --primary: #58a6ff; /* Azul claro de acento de GitHub */
-            --text-main: #c9d1d9; /* Texto principal claro */
-            --text-muted: #8b949e; /* Texto secundario gris */
-            --borders: #30363d; /* Color de bordes de GitHub */
+            --bg: #030712;
+            --card-bg: #111827;
+            --card-border: #1f2937;
+            --accent: #3b82f6; /* Azul Engineering */
+            --accent-glow: rgba(59, 130, 246, 0.3);
+            --text-primary: #f9fafb;
+            --text-secondary: #9ca3af;
             --font-main: 'Inter', sans-serif;
-            --font-code: 'Fira Code', monospace;
+            --font-mono: 'Fira Code', monospace;
         }
 
-        /* RESETEO BÁSICO */
-        * { box-sizing: border-box; margin: 0; padding: 0; outline: none; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
+            background-color: var(--bg);
+            color: var(--text-primary);
             font-family: var(--font-main);
-            background-color: var(--bg-body);
-            color: var(--text-main);
             line-height: 1.6;
-            overflow-x: hidden;
+            padding: 40px 20px;
         }
 
-        a { text-decoration: none; color: inherit; transition: color 0.3s ease; }
-        a:hover { color: var(--primary); }
+        .container { max-width: 1000px; margin: 0 auto; }
 
-        /* CONTENEDOR GLOBAL CENTRADO */
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+        /* HEADER PROFESIONAL */
+        header { margin-bottom: 60px; text-align: left; }
+        h1 { font-size: 3rem; font-weight: 700; letter-spacing: -2px; margin-bottom: 8px; }
+        .tagline { font-family: var(--font-mono); color: var(--accent); font-size: 1.1rem; }
 
-        /* ESTILOS GLOBALES DE SECCIÓN */
-        section {
-            padding: 60px 0;
-            border-bottom: 1px solid var(--borders);
-        }
-
-        h2.section-title {
-            font-family: var(--font-code);
-            font-size: 1.8rem;
-            font-weight: 600;
-            margin-bottom: 40px;
-            color: var(--text-main);
-            display: flex;
-            align-items: center;
-        }
-
-        h2.section-title::before {
-            content: '> ';
-            color: var(--primary);
-            font-weight: 700;
-            margin-right: 10px;
-        }
-
-        /* ANIMACIÓN DE ENTRADA SUAVE (Fade-In) */
-        @keyframes fadeInPage {
-            0% { opacity: 0; transform: translateY(10px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
-
-        .fade-in-section {
-            animation: fadeInPage 0.8s ease-out forwards;
-        }
-
-        /* ==================== 1. HERO SECTION (ENCABEZADO PRINCIPAL) ==================== */
-        #hero {
-            padding: 100px 0 60px 0;
-            text-align: left;
-            border-bottom: 1px solid var(--borders);
-        }
-
-        .hero-content h1 {
-            font-size: 3rem;
-            font-weight: 700;
-            letter-spacing: -1.5px;
-            margin-bottom: 10px;
-            color: #fff;
-        }
-
-        .hero-content p {
-            font-size: 1.25rem;
-            color: var(--text-muted);
-            font-family: var(--font-code);
-        }
-
-        .hero-content p span { color: var(--text-main); }
-
-        /* ==================== 2. SOBRE MI ==================== */
-        #sobre-mi p {
-            font-size: 1.1rem;
-            color: var(--text-muted);
-            max-width: 800px;
-        }
-
-        /* ==================== 4. TECNOLOGÍAS Y HABILIDADES ==================== */
-        .skills-grid {
+        /* BENTO GRID SYSTEM */
+        .bento-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            align-items: start;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 20px;
         }
 
-        /* IZQUIERDA: BADGES OFICIALES (shield.io) */
-        .badges-stack {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            justify-content: flex-start;
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 24px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
         }
 
-        .badges-stack img {
-            height: 28px;
-            transition: transform 0.2s ease;
+        .card:hover {
+            border-color: var(--accent);
+            box-shadow: 0 0 25px var(--accent-glow);
+            transform: translateY(-5px);
         }
 
-        .badges-stack img:hover {
-            transform: translateY(-2px);
+        /* SOBRE MÍ (Ocupa 2 columnas) */
+        .about-card { grid-column: span 2; }
+        .about-card h2 { font-size: 1.5rem; margin-bottom: 12px; }
+        .about-card p { color: var(--text-secondary); font-size: 1rem; }
+
+        /* TECH STACK (Columna lateral) */
+        .tech-card { grid-column: span 1; }
+        .tech-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px; }
+        .tech-tag {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            background: #1f2937;
+            color: var(--text-primary);
+            padding: 4px 10px;
+            border-radius: 6px;
+            border: 1px solid var(--card-border);
         }
 
-        /* DERECHA: LISTA DE HABILIDADES TÉCNICAS (Minimalista) */
-        .skills-list ul {
-            list-style: none;
-            font-family: var(--font-code);
-            color: var(--text-muted);
-        }
+        /* PROYECTOS (Grid inferior) */
+        .project-card { grid-column: span 3; display: flex; flex-direction: column; gap: 10px; }
+        .project-header { display: flex; justify-content: space-between; align-items: center; }
+        .project-title { font-weight: 600; font-size: 1.3rem; color: var(--accent); }
+        .status { font-family: var(--font-mono); font-size: 0.7rem; color: #10b981; text-transform: uppercase; }
 
-        .skills-list li {
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-        }
+        /* ESTADÍSTICAS SUTILES */
+        .stats-grid { grid-column: span 3; display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+        .stat-item { text-align: center; border: 1px dashed var(--card-border); border-radius: 12px; padding: 15px; }
+        .stat-value { font-family: var(--font-mono); font-size: 1.2rem; font-weight: 700; display: block; }
+        .stat-label { font-size: 0.8rem; color: var(--text-secondary); }
 
-        .skills-list li::before {
-            content: '->';
-            color: var(--primary);
-            margin-right: 10px;
-            font-weight: 700;
-        }
+        /* FOOTER */
+        footer { margin-top: 80px; text-align: center; border-top: 1px solid var(--card-border); padding-top: 30px; }
+        .footer-text { font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-secondary); }
 
-        /* ==================== FOOTER ==================== */
-        footer {
-            padding: 40px 0;
-            text-align: center;
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            font-family: var(--font-code);
-        }
-
-        footer strong { color: var(--text-main); }
-
-        /* ==================== RESPONSIVE DESIGN (Celulares) ==================== */
+        /* RESPONSIVE */
         @media (max-width: 768px) {
-            .hero-content h1 { font-size: 2.5rem; }
-            h2.section-title { font-size: 1.5rem; }
-            .skills-grid { grid-template-columns: 1fr; gap: 30px; }
-            .hero-content p { font-size: 1.1rem; }
-            section { padding: 40px 0; }
+            .bento-grid { grid-template-columns: 1fr; }
+            .about-card, .tech-card, .project-card, .stats-grid { grid-column: span 1; }
+            h1 { font-size: 2.2rem; }
         }
     </style>
 </head>
-<body class="fade-in-section">
+<body>
 
-    <div class="container">
+<div class="container">
+    <header>
+        <h1>Dilan Yax</h1>
+        <div class="tagline">_INGENIERIA_EN_SISTEMAS // SOFTWARE_DEVELOPER</div>
+    </header>
 
-        <header id="hero">
-            <div class="hero-content">
-                <h1>Dilan Yax</h1>
-                <p>Estudiante de <span>Ingeniería en Sistemas</span> | Desarrollo de Software</p>
+    <main class="bento-grid">
+        <div class="card about-card">
+            <h2>Perfil Profesional</h2>
+            <p>Especializado en la arquitectura de soluciones técnicas y lógica de sistemas. Enfocado en la optimización de procesos mediante código limpio y eficiente. Estudiante de alto rendimiento en Ingeniería en Sistemas con pasión por la infraestructura de software.</p>
+        </div>
+
+        <div class="card tech-card">
+            <h2>Stack</h2>
+            <div class="tech-list">
+                <span class="tech-tag">C#</span>
+                <span class="tech-tag">C++</span>
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">SQL Server</span>
+                <span class="tech-tag">.NET WPF</span>
+                <span class="tech-tag">Git</span>
             </div>
-        </header>
+        </div>
 
-        <section id="sobre-mi">
-            <h2 class="section-title">Sobre mi</h2>
-            <p>Enfocado profesionalmente en el desarrollo de software y la arquitectura de sistemas. Mi especialización se centra en aplicar la lógica de programación para construir herramientas eficientes, escalables y orientadas a la optimización técnica de procesos.</p>
-        </section>
-
-        <section id="proyectos">
-            <h2 class="section-title">Proyectos Destacados</h2>
-            
-            <div class="projects-stack">
-                
-                <div class="project-card">
-                    <h3>Simulador de Sistemas Operativos</h3>
-                    <p>Implementación técnica en C# y .NET WPF. Desarrollé módulos críticos para la planificación de procesos y la gestión dinámica de memoria.</p>
-                    <div class="project-card-tech">
-                        <span>C#</span> <span>.NET WPF</span> <span>Sistemas Operativos</span> <span>Algoritmos</span>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <h3>Backend API Services</h3>
-                    <p>Diseño e implementación de una API REST robusta para gestión de datos y autenticación segura. Actualmente en fase de desarrollo.</p>
-                    <div class="project-card-tech">
-                        <span>Python</span> <span>Flask</span> <span>REST API</span> <span>SQL Server</span>
-                    </div>
-                </div>
-                
+        <div class="card project-card">
+            <div class="project-header">
+                <div class="project-title">Simulador de Sistemas Operativos</div>
+                <div class="status">PROYECTO_ACTIVO</div>
             </div>
-        </section>
+            <p>Implementación de algoritmos de planificación de CPU y gestión de memoria dinámica en entorno C#. Resolución de problemas de concurrencia y gestión de recursos del sistema.</p>
+        </div>
 
-        <section id="tecnologias">
-            <h2 class="section-title">Tecnologías</h2>
-            
-            <div class="skills-grid">
-                
-                <div class="badges-stack">
-                    <img src="https://img.shields.io/badge/C%23-239120?style=flat-square&logo=c-sharp&logoColor=white" alt="C# Badge">
-                    <img src="https://img.shields.io/badge/C++-00599C?style=flat-square&logo=c%2B%2B&logoColor=white" alt="C++ Badge">
-                    <img src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python Badge">
-                    <img src="https://img.shields.io/badge/SQL_Server-CC2927?style=flat-square&logo=microsoft-sql-server&logoColor=white" alt="SQL Server Badge">
-                    <img src="https://img.shields.io/badge/.NET_WPF-512BD4?style=flat-square&logo=dotnet&logoColor=white" alt=".NET WPF Badge">
-                </div>
-
-                <div class="skills-list">
-                    <ul>
-                        <li>Desarrollo Desktop con C# / .NET WPF</li>
-                        <li>Lógica y Algoritmos con C++ y Python</li>
-                        <li>Diseño de Bases de Datos SQL Server</li>
-                        <li>Arquitectura de Software</li>
-                    </ul>
-                </div>
-                
+        <div class="stats-grid">
+            <div class="card stat-item">
+                <span class="stat-value">2026</span>
+                <span class="stat-label">Fullstack Path</span>
             </div>
-        </section>
+            <div class="card stat-item">
+                <span class="stat-value">C# / WPF</span>
+                <span class="stat-label">Core Specialization</span>
+            </div>
+        </div>
+    </main>
 
-        <footer>
-            <p> 2026 <strong>Dilan Yax</strong></p>
-            <p style="font-size:0.75rem; margin-top:5px;">[ Ingenieria en Sistemas | GitHub Pages ]</p>
-        </footer>
+    <footer>
+        <div class="footer-text">
+            SYSTEMS_ENGINEER_PORTFOLIO_V3.0 // BUILD_ON_GITHUB_PAGES
+        </div>
+    </footer>
+</div>
 
-    </div> </body>
+</body>
 </html>
